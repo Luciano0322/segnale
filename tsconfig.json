@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
     "declaration": true,
+    "declarationDir": "./types",
+    "outDir": "./dist",
     "module": "ESNext",
-    "target": "ES5",
+    "target": "ES2020",
     "moduleResolution": "Node",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "jsx": "react"
   },
   "include": ["src"],
   "exclude": ["node_modules", "tests"]

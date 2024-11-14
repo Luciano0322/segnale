@@ -1,10 +1,14 @@
 {
   "name": "segnale",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "build": "rollup -c",
+    "clean": "rm -rf dist",
+    "prepare": "npm run build",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Luciano Lee",
@@ -16,9 +20,31 @@
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rollup": "^4.26.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "exports": {
+    "./core": {
+      "import": "./dist/core/index.esm.js",
+      "require": "./dist/core/index.cjs.js",
+      "types": "./types/core/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react/index.esm.js",
+      "require": "./dist/react/index.cjs.js",
+      "types": "./types/react/index.d.ts"
+    },
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./types/index.d.ts"
+    }
   }
 }

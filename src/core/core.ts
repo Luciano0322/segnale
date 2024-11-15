@@ -141,20 +141,27 @@ export function runWithContext<T>(computation: Computation, fn: () => T): T {
   }
 }
 
-export function withContext<T>(fn: () => Promise<T>): Promise<T> {
-  const running = context[context.length - 1];
-  return fn().then((result) => {
-    return runWithContext(running, () => result);
-  });
+export async function withContext<T>(computation: Computation, fn: () => Promise<T>): Promise<T> {
+  context.push(computation);
+  try {
+    return await fn();
+  } finally {
+    context.pop();
+  }
 }
 
-export function createEffect(fn: () => void) {
+export function createEffect(fn: () => void | Promise<void>) {
   const running: Computation = {
     execute: () => {
       if (!running.dirty) return;
       running.dirty = false;
       cleanupDependencies(running);
-      runWithContext(running, fn);
+      const result = runWithContext(running, fn);
+      if (result instanceof Promise) {
+        result.catch((e) => {
+          console.error('Effect encountered an error:', e);
+        });
+      }
     },
     dependencies: new Set(),
     dirty: true,
@@ -198,9 +205,11 @@ export function scheduleComputation(computation: Computation) {
 }
 
 function flushComputations() {
-  for (const computation of dirtyComputations) {
-    computation.execute();
-  }
-  dirtyComputations.clear();
-  isFlushing = false;
+  batchUpdates(() => {
+    for (const computation of dirtyComputations) {
+      computation.execute();
+    }
+    dirtyComputations.clear();
+    isFlushing = false;
+  });
 }

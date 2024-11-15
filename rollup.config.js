@@ -25,10 +25,9 @@ export default [
       }),
     ],
   },
-  // React part
   {
     input: 'src/react/index.ts',
-    external: ['react', 'react/jsx-runtime'],
+    external: ['react', 'react-dom'], // 指定外部依赖
     output: [
       {
         file: 'dist/react/index.cjs.js',

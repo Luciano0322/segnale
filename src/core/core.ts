@@ -58,7 +58,7 @@ export function cleanupDependencies(computation: Computation) {
 }
 
 // 判断是否为对象类型
-function isObject(value: any): value is object {
+function isObject(value: unknown): value is object {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
@@ -67,7 +67,7 @@ export function createSegnale<T>(initialValue: T): SegnaleType<T> {
   if (Array.isArray(initialValue)) {
     return createPrimitiveSignal(initialValue) as SegnaleType<T>;
   } else if (isObject(initialValue)) {
-    return createSegnaleObject(initialValue as any) as SegnaleType<T>;
+    return createSegnaleObject(initialValue as T & object) as SegnaleType<T>;
   } else {
     return createPrimitiveSignal(initialValue) as SegnaleType<T>;
   }
@@ -161,7 +161,7 @@ export async function withContext<T>(
 }
 
 export function createEffect(fn: () => void | Promise<void>) {
-  const running: Computation = {
+  const running: Computation<void> = {
     execute: () => {
       if (!running.dirty) return;
       running.dirty = false;
@@ -181,7 +181,7 @@ export function createEffect(fn: () => void | Promise<void>) {
 }
 
 export function createMemo<T>(fn: () => T): () => T {
-  const running: Computation = {
+  const running: Computation<T> = {
     execute: () => {
       if (!running.dirty) return;
       running.dirty = false;

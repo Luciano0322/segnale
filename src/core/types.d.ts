@@ -1,8 +1,8 @@
-export interface Computation {
-  dependencies: Set<Set<Computation>>;
+export interface Computation<T = unknown> {
+  dependencies: Set<Set<Computation<unknown>>>;
   execute: () => void;
   dirty: boolean;
-  value?: any;
+  value?: T;
 }
 
 export interface Segnale<T> {
@@ -11,7 +11,7 @@ export interface Segnale<T> {
   subscribe: (listener: () => void) => () => void;
 }
 
-export type SegnaleType<T> = T extends any[]
+export type SegnaleType<T> = T extends unknown[]
   ? Segnale<T>
   : T extends object
     ? SegnaleObject<T>

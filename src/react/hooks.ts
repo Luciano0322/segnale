@@ -1,4 +1,4 @@
-import { useEffect, useSyncExternalStore } from 'react';
+import { useEffect, useSyncExternalStore, DependencyList } from 'react';
 import { Computation, Segnale } from '../core/types';
 import {
   cleanupDependencies,
@@ -19,9 +19,9 @@ export function useSegnale<T>(signal: Segnale<T>): T {
   return value;
 }
 
-export function useSegnaleEffect(fn: () => void, dependencies: any[]) {
+export function useSegnaleEffect(fn: () => void, dependencies: DependencyList) {
   useEffect(() => {
-    const running: Computation = {
+    const running: Computation<void> = {
       execute: () => {
         if (!running.dirty) return;
         running.dirty = false;
@@ -43,10 +43,10 @@ export function useSegnaleEffect(fn: () => void, dependencies: any[]) {
 
 export function useSegnaleAsyncEffect(
   effect: () => Promise<void>,
-  dependencies: any[]
+  dependencies: DependencyList
 ) {
   useEffect(() => {
-    const running: Computation = {
+    const running: Computation<void> = {
       execute: async () => {
         if (!running.dirty) return;
         running.dirty = false;

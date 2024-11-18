@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "prepare": "pnpm run build",
     "test": "jest",
-    "lint": "eslint src test",
+    "lint": "eslint src tests",
     "lint:fix": "eslint src tests --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
@@ -33,6 +33,7 @@
     "@typescript-eslint/parser": "^8.14.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jest": "^28.9.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",

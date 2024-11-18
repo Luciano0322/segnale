@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { renderHook, act, render } from '@testing-library/react';
 import { createSegnale } from '../src/core';
-import { useSegnale, useSegnaleAsyncEffect, useSegnaleEffect } from '../src/react/hooks';
+import {
+  useSegnale,
+  useSegnaleAsyncEffect,
+  useSegnaleEffect,
+} from '../src/react/hooks';
 
 describe('useSegnale', () => {
   it('should read the initial value of the signal', () => {

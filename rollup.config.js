@@ -20,7 +20,9 @@ export default [
       resolve(),
       commonjs(),
       typescript({
-        tsconfigOverride: { compilerOptions: { declaration: true, outDir: 'dist/core' } },
+        tsconfigOverride: {
+          compilerOptions: { declaration: true, outDir: 'dist/core' },
+        },
         useTsconfigDeclarationDir: true,
       }),
     ],
@@ -43,7 +45,9 @@ export default [
       resolve(),
       commonjs(),
       typescript({
-        tsconfigOverride: { compilerOptions: { declaration: true, outDir: 'dist/react' } },
+        tsconfigOverride: {
+          compilerOptions: { declaration: true, outDir: 'dist/react' },
+        },
         useTsconfigDeclarationDir: true,
       }),
     ],

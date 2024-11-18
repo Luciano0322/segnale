@@ -12,10 +12,10 @@ export interface Segnale<T> {
 }
 
 export type SegnaleType<T> = T extends any[]
-? Segnale<T>
-: T extends object
-  ? SegnaleObject<T>
-  : Segnale<T>;
+  ? Segnale<T>
+  : T extends object
+    ? SegnaleObject<T>
+    : Segnale<T>;
 
 export type SegnaleObject<T extends object> = {
   [K in keyof T]: SegnaleType<T[K]>;

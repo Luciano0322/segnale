@@ -1,6 +1,11 @@
 import { useEffect, useSyncExternalStore } from 'react';
 import { Computation, Segnale } from '../core/types';
-import { cleanupDependencies, runWithContext, scheduleComputation, withContext } from '../core';
+import {
+  cleanupDependencies,
+  runWithContext,
+  scheduleComputation,
+  withContext,
+} from '../core';
 
 export function useSegnale<T>(signal: Segnale<T>): T {
   const value = useSyncExternalStore(
@@ -36,7 +41,10 @@ export function useSegnaleEffect(fn: () => void, dependencies: any[]) {
   }, dependencies);
 }
 
-export function useSegnaleAsyncEffect(effect: () => Promise<void>, dependencies: any[]) {
+export function useSegnaleAsyncEffect(
+  effect: () => Promise<void>,
+  dependencies: any[]
+) {
   useEffect(() => {
     const running: Computation = {
       execute: async () => {

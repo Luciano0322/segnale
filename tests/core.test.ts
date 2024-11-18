@@ -5,7 +5,7 @@ import {
   runInBatch,
   setBatchUpdates,
   withContext,
-  context
+  context,
 } from '../src/core';
 
 describe('Core Functionality Tests', () => {
@@ -98,25 +98,25 @@ describe('Core Functionality Tests', () => {
   test('batchUpdates should be customizable', () => {
     const signal = createSegnale(0);
     let effectValue = 0;
-  
+
     // 自定义 batchUpdates
     const mockBatchUpdates = jest.fn((callback) => {
       callback();
     });
     setBatchUpdates(mockBatchUpdates);
-  
+
     createEffect(() => {
       effectValue = signal.read();
     });
-  
+
     return new Promise<void>((resolve) => {
       queueMicrotask(() => {
         expect(effectValue).toBe(0);
         // 此时，effect 的初始执行已经调用了一次 batchUpdates
         expect(mockBatchUpdates).toHaveBeenCalledTimes(1);
-  
+
         signal.write(1);
-  
+
         queueMicrotask(() => {
           expect(effectValue).toBe(1);
           expect(mockBatchUpdates).toHaveBeenCalledTimes(2);
@@ -157,7 +157,7 @@ describe('Core Functionality Tests', () => {
   test('withContext should preserve computation context in async functions', async () => {
     const signal = createSegnale(0);
     let effectValue = 0;
-  
+
     createEffect(() => {
       const running = context[context.length - 1];
       withContext(running, async () => {
@@ -165,7 +165,7 @@ describe('Core Functionality Tests', () => {
         effectValue = signal.read();
       });
     });
-  
+
     // 等待 effect 执行
     await new Promise<void>((resolve) => {
       queueMicrotask(() => {
@@ -174,10 +174,10 @@ describe('Core Functionality Tests', () => {
         resolve();
       });
     });
-  
+
     // 更新信号值
     signal.write(1);
-  
+
     // 等待 effect 执行
     await new Promise<void>((resolve) => {
       queueMicrotask(() => {
@@ -190,4 +190,3 @@ describe('Core Functionality Tests', () => {
     });
   });
 });
-

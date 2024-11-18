@@ -1,4 +1,4 @@
-import { Computation, Segnale, SegnaleObject, SegnaleType } from "./types";
+import { Computation, Segnale, SegnaleObject, SegnaleType } from './types';
 
 export const context: Computation[] = [];
 
@@ -42,7 +42,10 @@ export function runInBatch(fn: () => void) {
   }
 }
 
-export function subscribe(running: Computation, subscriptions: Set<Computation>): void {
+export function subscribe(
+  running: Computation,
+  subscriptions: Set<Computation>
+): void {
   subscriptions.add(running);
   running.dependencies.add(subscriptions);
 }
@@ -70,14 +73,18 @@ export function createSegnale<T>(initialValue: T): SegnaleType<T> {
   }
 }
 
-export function createSegnaleObject<T extends object>(initialValue: T): SegnaleObject<T> {
+export function createSegnaleObject<T extends object>(
+  initialValue: T
+): SegnaleObject<T> {
   const signals = {} as SegnaleObject<T>;
 
   for (const key in initialValue) {
     if (Object.prototype.hasOwnProperty.call(initialValue, key)) {
       const typedKey = key as keyof T;
       const value = initialValue[typedKey];
-      signals[typedKey] = createSegnale(value) as SegnaleType<T[typeof typedKey]>;
+      signals[typedKey] = createSegnale(value) as SegnaleType<
+        T[typeof typedKey]
+      >;
     }
   }
 
@@ -141,7 +148,10 @@ export function runWithContext<T>(computation: Computation, fn: () => T): T {
   }
 }
 
-export async function withContext<T>(computation: Computation, fn: () => Promise<T>): Promise<T> {
+export async function withContext<T>(
+  computation: Computation,
+  fn: () => Promise<T>
+): Promise<T> {
   context.push(computation);
   try {
     return await fn();

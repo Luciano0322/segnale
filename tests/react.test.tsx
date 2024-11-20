@@ -45,24 +45,24 @@ describe('useSegnaleEffect', () => {
       return null;
     };
 
-    // 渲染组件，并等待初始 Effect 执行
+    // 渲染組件，並等待初始 Effect 執行
     await act(async () => {
       render(<TestComponent />);
-      // 等待所有微任务执行完毕
+      // 等待所有微任務執行完畢
       await Promise.resolve();
     });
 
-    // 现在 Effect 应该已经执行过一次
+    // 現在 Effect 應該已經執行過一次
     expect(effectFn).toHaveBeenCalledTimes(1);
 
-    // 更新信号值，并等待 Effect 重新执行
+    // 更新信號值，並等待 Effect 重新執行
     await act(async () => {
       signal.write(1);
-      // 等待所有微任务执行完毕
+      // 等待所有為任務執行完畢
       await Promise.resolve();
     });
 
-    // Effect 应该被再次调用
+    // Effect 應該被再次調用
     expect(effectFn).toHaveBeenCalledTimes(2);
   });
 });
@@ -81,25 +81,25 @@ describe('useSegnaleAsyncEffect', () => {
       return null;
     };
 
-    // 渲染组件，并等待初始 Effect 执行
+    // 渲染組件，並等待初始 Effect 執行
     await act(async () => {
       render(<TestComponent />);
-      // 等待所有微任务和异步任务执行完毕
+      // 等待所有微任務和異步執行完畢
       await Promise.resolve();
     });
 
-    // 现在 Effect 应该已经执行过一次
+    // 現在 Effect 應該已經執行過一次
     expect(effectFn).toHaveBeenCalledTimes(1);
 
-    // 更新信号值，并等待 Effect 重新执行
+    // 更新信號值，並等待 Effect 重新執行
     await act(async () => {
       signal.write(1);
-      // 等待所有微任务和异步任务执行完毕
+      // 等待所有微任務和異步執行完畢
       await Promise.resolve();
-      await Promise.resolve(); // 如果异步操作嵌套，需要多等待一次
+      await Promise.resolve(); // 如果異步操作嵌套，需要多等待一次
     });
 
-    // Effect 应该被再次调用
+    // Effect 應該被再次調用
     expect(effectFn).toHaveBeenCalledTimes(2);
   });
 });

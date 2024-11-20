@@ -1,4 +1,4 @@
-import { useEffect, useSyncExternalStore, DependencyList } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import { Computation, Segnale } from '../core/types';
 import {
   cleanupDependencies,
@@ -19,7 +19,7 @@ export function useSegnale<T>(signal: Segnale<T>): T {
   return value;
 }
 
-export function useSegnaleEffect(fn: () => void, dependencies: DependencyList) {
+export function useSegnaleEffect(fn: () => void, dependencies: unknown[]) {
   useEffect(() => {
     const running: Computation<void> = {
       execute: () => {
@@ -38,12 +38,13 @@ export function useSegnaleEffect(fn: () => void, dependencies: DependencyList) {
     return () => {
       cleanupDependencies(running);
     };
-  }, dependencies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fn, ...dependencies]);
 }
 
 export function useSegnaleAsyncEffect(
   effect: () => Promise<void>,
-  dependencies: DependencyList
+  dependencies: unknown[]
 ) {
   useEffect(() => {
     const running: Computation<void> = {
@@ -62,5 +63,6 @@ export function useSegnaleAsyncEffect(
     return () => {
       cleanupDependencies(running);
     };
-  }, dependencies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [effect, ...dependencies]);
 }

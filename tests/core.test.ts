@@ -10,7 +10,7 @@ import {
 
 describe('Core Functionality Tests', () => {
   beforeEach(() => {
-    // 重置 batchUpdates 为默认实现
+    // 重置 batchUpdates 為預設
     setBatchUpdates((callback) => {
       callback();
     });
@@ -35,12 +35,12 @@ describe('Core Functionality Tests', () => {
       effectValue = signal.read();
     });
 
-    // 初始执行 effect
+    // 初始執行 effect
     return new Promise<void>((resolve) => {
       queueMicrotask(() => {
         expect(effectValue).toBe(0);
 
-        // 更新信号值
+        // 更新信號值
         signal.write(1);
 
         queueMicrotask(() => {
@@ -88,7 +88,7 @@ describe('Core Functionality Tests', () => {
         });
 
         queueMicrotask(() => {
-          expect(effectRunCount).toBe(2); // 应该只触发一次 effect
+          expect(effectRunCount).toBe(2); // 應該只觸發一次 effect
           resolve();
         });
       });
@@ -112,7 +112,7 @@ describe('Core Functionality Tests', () => {
     return new Promise<void>((resolve) => {
       queueMicrotask(() => {
         expect(effectValue).toBe(0);
-        // 此时，effect 的初始执行已经调用了一次 batchUpdates
+        // 此時，effect 的初始執行已經調用了一次 batchUpdates
         expect(mockBatchUpdates).toHaveBeenCalledTimes(1);
 
         signal.write(1);
@@ -166,10 +166,10 @@ describe('Core Functionality Tests', () => {
       });
     });
 
-    // 等待 effect 执行
+    // 等待 effect 執行
     await new Promise<void>((resolve) => {
       queueMicrotask(() => {
-        // 初始执行
+        // 初始執行
         expect(effectValue).toBe(0);
         resolve();
       });
@@ -178,10 +178,10 @@ describe('Core Functionality Tests', () => {
     // 更新信号值
     signal.write(1);
 
-    // 等待 effect 执行
+    // 等待 effect 執行
     await new Promise<void>((resolve) => {
       queueMicrotask(() => {
-        // 等待异步操作完成
+        // 等待異步操作完成
         queueMicrotask(() => {
           expect(effectValue).toBe(1);
           resolve();

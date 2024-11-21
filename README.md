@@ -108,3 +108,16 @@ A React Hook to use a signal in a component.
 - signal: The signal to subscribe to.
 #### Returns:
 - The current value of the signal.
+
+## Contributing
+Contributions are welcome! Please follow these steps to contribute:  
+1.	Fork the repository on GitHub.
+2.	Create a new branch for your feature or bugfix.
+3.	Commit your changes with clear commit messages.
+4.	Push your branch to your forked repository.
+5.	Open a pull request on the main repository.  
+
+Please ensure that your code adheres to the project’s coding standards and passes all linting and testing.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

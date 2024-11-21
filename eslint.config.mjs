@@ -13,7 +13,7 @@ export default [
   // 通用配置，适用于所有文件
   {
     files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
-    ignores: ['eslint.config.mjs'],
+    ignores: ['eslint.config.mjs', 'rollup.config.js'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -41,12 +41,10 @@ export default [
       ...reactPlugin.configs.recommended.rules,
       ...reactHooksPlugin.configs.recommended.rules,
       'prettier/prettier': 'error',
-      // 自定义规则
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/no-unused-expressions': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
-      // 其他规则...
     },
     settings: {
       react: {
@@ -54,21 +52,19 @@ export default [
       },
     },
   },
-  // 针对测试文件的配置
   {
     files: ['tests/**/*.{js,mjs,cjs,jsx,ts,tsx}'],
     languageOptions: {
       globals: {
-        ...globals.jest, // 添加 Jest 全局变量
+        ...globals.jest,
       },
     },
     plugins: {
       jest: jestPlugin,
     },
     rules: {
-      ...jestPlugin.configs.recommended.rules, // 使用 Jest 推荐规则
+      ...jestPlugin.configs.recommended.rules,
     },
   },
-  // 禁用与 Prettier 冲突的规则
   prettierConfig,
 ];

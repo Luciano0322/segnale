@@ -96,7 +96,6 @@ describe('useSegnaleAsyncEffect', () => {
       signal.write(1);
       // 等待所有微任務和異步執行完畢
       await Promise.resolve();
-      await Promise.resolve(); // 如果異步操作嵌套，需要多等待一次
     });
 
     // Effect 應該被再次調用

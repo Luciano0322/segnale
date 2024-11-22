@@ -13,7 +13,7 @@ export default [
   // 通用配置，适用于所有文件
   {
     files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
-    ignores: ['eslint.config.mjs', 'rollup.config.js'],
+    ignores: ['eslint.config.mjs', 'rollup.config.js', 'types/**'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',

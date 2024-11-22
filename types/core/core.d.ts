@@ -1,0 +1,17 @@
+import { Computation, Segnale, SegnaleObject, SegnaleType } from './types';
+export declare const context: Computation[];
+export declare let batchUpdates: (callback: () => void) => void;
+export declare function setBatchUpdates(fn: (callback: () => void) => void): void;
+export declare function startBatch(): void;
+export declare function endBatch(): void;
+export declare function runInBatch(fn: () => void): void;
+export declare function subscribe(running: Computation, subscriptions: Set<Computation>): void;
+export declare function cleanupDependencies(computation: Computation): void;
+export declare function createSegnale<T>(initialValue: T): SegnaleType<T>;
+export declare function createSegnaleObject<T extends object>(initialValue: T): SegnaleObject<T>;
+export declare function createPrimitiveSignal<T>(initialValue: T): Segnale<T>;
+export declare function runWithContext<T>(computation: Computation, fn: () => T): T;
+export declare function withContext<T>(computation: Computation, fn: () => Promise<T>): Promise<T>;
+export declare function createEffect(fn: () => void | Promise<void>): void;
+export declare function createMemo<T>(fn: () => T): () => T;
+export declare function scheduleComputation(computation: Computation): void;

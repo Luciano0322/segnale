@@ -12,26 +12,26 @@ A lightweight and efficient reactive state management library for JavaScript and
 You can install Segnale via npm:  
 
 ```bash
-npm install segnale
+npm install segnale-react
 ```
 
 Or using yarn:  
 
 ```bash
-yarn add segnale
+yarn add segnale-react
 ```
 
 Or using pnpm:  
 
 ```bash
-pnpm add segnale
+pnpm add segnale-react
 ```
 
 ## Getting Started
 
 ### Basic Usage
 ```js
-import { createSegnale } from 'segnale';
+import { createSegnale } from 'segnale-react';
 
 // Create a signal
 const count = createSegnale(0);
@@ -62,7 +62,7 @@ The createEffect function creates a side effect that automatically executes when
 
 ##### Example:
 ```js
-import { createSegnale, createEffect } from 'segnale';
+import { createSegnale, createEffect } from 'segnale-react';
 
 // Create a signal
 const count = createSegnale(0);
@@ -82,7 +82,7 @@ The createMemo function creates a computed value that automatically recalculates
 
 ##### Example:
 ```js
-import { createSegnale, createMemo } from 'segnale';
+import { createSegnale, createMemo } from 'segnale-react';
 
 // Create signals
 const firstName = createSegnale('John');
@@ -109,8 +109,7 @@ console.log(fullName()); // Output: Jane Doe
 
 ```jsx
 import React from 'react';
-import { createSegnale } from 'segnale';
-import { useSegnale } from 'segnale/react';
+import { createSegnale, useSegnale } from 'segnale-react';
 
 // Create a signal
 const count = createSegnale(0);
@@ -137,8 +136,7 @@ export default Counter;
 #### Using useSegnaleEffect
 ```jsx
 import React from 'react';
-import { createSegnale } from 'segnale';
-import { useSegnale, useSegnaleEffect } from 'segnale/react';
+import { createSegnale, useSegnale, useSegnaleEffect } from 'segnale-react';
 
 // Create a signal
 const count = createSegnale(0);

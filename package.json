@@ -1,5 +1,5 @@
 {
-  "name": "segnale",
+  "name": "segnale-react",
   "version": "1.0.0",
   "type": "module",
   "description": "A lightweight and efficient reactive state management library inspired by signals.",

@@ -1,9 +1,23 @@
 {
   "name": "segnale",
   "version": "1.0.0",
+  "description": "A lightweight and efficient reactive state management library inspired by signals.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "types/index.d.ts",
+  "keywords": ["signal", "state management", "reactive", "react", "typescript"],
+  "author": "Luciano Lee",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Luciano0322/segnale.git"
+  },
+  "files": [
+    "dist",
+    "types",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "rollup -c",
     "clean": "rm -rf dist",
@@ -13,10 +27,6 @@
     "lint:fix": "eslint src tests --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
-  "keywords": [],
-  "author": "Luciano Lee",
-  "license": "MIT",
-  "description": "Signal solution",
   "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
   "devDependencies": {
     "@eslint/js": "^9.15.0",

@@ -1,4 +1,4 @@
-# Segnale
+# Segnale-React
 A lightweight and efficient reactive state management library for JavaScript and TypeScript, inspired by signals and designed to work seamlessly with React and other frameworks.
 ## Features
 - Simple API: Easy to learn and use.

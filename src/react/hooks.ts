@@ -34,7 +34,6 @@ export function useSegnaleEffect(fn: () => void, dependencies: unknown[]) {
 
     scheduleComputation(running);
 
-    // Cleanup when dependencies change or component unmounts
     return () => {
       cleanupDependencies(running);
     };

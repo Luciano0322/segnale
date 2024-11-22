@@ -2,26 +2,21 @@ import { Computation, Segnale, SegnaleObject, SegnaleType } from './types';
 
 export const context: Computation[] = [];
 
-// 批量更新相关的全局变量
 let batching = false;
 const pendingComputations = new Set<Computation>();
 
-// 批量更新的回调函数，默认直接执行
 export let batchUpdates = (callback: () => void) => {
   callback();
 };
 
-// 允许设置批量更新的实现（例如在 React 环境下）
 export function setBatchUpdates(fn: (callback: () => void) => void) {
   batchUpdates = fn;
 }
 
-// 开始批量更新
 export function startBatch() {
   batching = true;
 }
 
-// 结束批量更新
 export function endBatch() {
   batching = false;
   const computations = Array.from(pendingComputations);
@@ -32,7 +27,6 @@ export function endBatch() {
   });
 }
 
-// 运行批量更新
 export function runInBatch(fn: () => void) {
   startBatch();
   try {
@@ -57,12 +51,10 @@ export function cleanupDependencies(computation: Computation) {
   computation.dependencies.clear();
 }
 
-// 判断是否为对象类型
 function isObject(value: unknown): value is object {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-// 通用型信号创建函数，判断是否为对象类型
 export function createSegnale<T>(initialValue: T): SegnaleType<T> {
   if (Array.isArray(initialValue)) {
     return createPrimitiveSignal(initialValue) as SegnaleType<T>;
@@ -110,7 +102,6 @@ export function createPrimitiveSignal<T>(initialValue: T): Segnale<T> {
 
     if (newValue !== value) {
       value = newValue;
-      // 标记内部订阅者为脏的并调度
       for (const sub of subscriptions) {
         if (!sub.dirty) {
           sub.dirty = true;
@@ -138,7 +129,6 @@ export function createPrimitiveSignal<T>(initialValue: T): Segnale<T> {
   };
 }
 
-// 运行计算上下文
 export function runWithContext<T>(computation: Computation, fn: () => T): T {
   context.push(computation);
   try {
@@ -201,7 +191,6 @@ export function createMemo<T>(fn: () => T): () => T {
   };
 }
 
-// 调度机制
 const dirtyComputations = new Set<Computation>();
 let isFlushing = false;
 

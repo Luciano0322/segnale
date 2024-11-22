@@ -16,6 +16,7 @@ export default [
         format: 'esm',
       },
     ],
+    external: ['tslib'],
     plugins: [
       resolve(),
       commonjs(),
@@ -29,7 +30,7 @@ export default [
   },
   {
     input: 'src/react/index.ts',
-    external: ['react', 'react-dom'], // 指定外部依赖
+    external: ['react', 'react-dom', 'tslib'],
     output: [
       {
         file: 'dist/react/index.cjs.js',

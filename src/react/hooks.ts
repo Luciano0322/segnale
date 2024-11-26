@@ -1,4 +1,5 @@
-import { useEffect, useSyncExternalStore } from 'react';
+import { useEffect } from 'react';
+import { useSyncExternalStore } from 'use-sync-external-store/shim';
 import { Computation, Segnale } from '../core/types';
 import {
   cleanupDependencies,

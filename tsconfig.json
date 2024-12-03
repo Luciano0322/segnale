@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx", // 或者 "react"
+    "jsx": "react-jsx", // or "react"
     "types": ["jest", "node"]
   },
   "include": ["src"],

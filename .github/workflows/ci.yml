@@ -18,25 +18,25 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
-    - name: Install pnpm
-      run: npm install -g pnpm
+        pnpm-version: '8.6.13'  # 指定 pnpm 版本
 
     - name: Install dependencies
-      run: npm install
+      run: pnpm install
 
     - name: Run tests
-      run: npm test
+      run: pnpm run test
 
     - name: Build project
-      run: npm run build
+      run: pnpm run build
 
     - name: Lint code
-      run: npm run lint
+      run: pnpm run lint
 
     - name: Check type
-      run: npm run type-check
+      run: pnpm run type-check

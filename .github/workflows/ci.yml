@@ -13,23 +13,19 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [18, 20, 22]
         # 查看支持的 Node.js 版本：https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-
-    - name: Setup pnpm
+    - name: Setup pnpm with Node.js ${{ matrix.node-version }}
       uses: pnpm/action-setup@v2
       with:
+        node-version: ${{ matrix.node-version }}  # 设置 Node.js 版本
         version: 8.6.13  # 指定您需要的 pnpm 版本
         run_install: false  # 禁用自动运行 pnpm install
+        cache: true  # 启用 pnpm 缓存
 
     - name: Install dependencies
       run: pnpm install

@@ -10,7 +10,6 @@ import prettierConfig from 'eslint-config-prettier';
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
-  // 通用配置，适用于所有文件
   {
     files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
     ignores: ['eslint.config.mjs', 'rollup.config.js', 'types/**'],
@@ -26,7 +25,8 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
-        project: './tsconfig.json',
+        project: './tsconfig.eslint.json',
+        tsconfigRootDir: new URL('.', import.meta.url).pathname,
       },
     },
     plugins: {
@@ -55,11 +55,23 @@ export default [
   {
     files: ['tests/**/*.{js,mjs,cjs,jsx,ts,tsx}'],
     languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: {
+        ...globals.node,
         ...globals.jest,
+      },
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        project: './tsconfig.eslint.json',
+        tsconfigRootDir: new URL('.', import.meta.url).pathname,
       },
     },
     plugins: {
+      '@typescript-eslint': typescriptPlugin,
       jest: jestPlugin,
     },
     rules: {

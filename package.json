@@ -1,6 +1,6 @@
 {
   "name": "segnale-react",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "description": "A lightweight and efficient reactive state management library inspired by signals.",
   "main": "dist/index.cjs.js",
@@ -26,12 +26,14 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "pnpm run clean && rollup -c",
     "clean": "rm -rf dist",
     "prepare": "pnpm run build",
+    "release": "standard-version",
     "test": "jest",
     "lint": "eslint src tests",
     "lint:fix": "eslint src tests --fix",
+    "type-check": "tsc --noEmit",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
@@ -63,6 +65,7 @@
     "react-dom": "^18.3.1",
     "rollup": "^4.26.0",
     "rollup-plugin-typescript2": "^0.36.0",
+    "standard-version": "^9.5.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.14.0"

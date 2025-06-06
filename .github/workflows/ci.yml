@@ -18,11 +18,24 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Use Node.js and pnpm cache
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: "pnpm"
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 9.14.4   # 使用有效的 pnpm 版本
+        run_install: false
+
+    - name: Cache pnpm store
+      uses: actions/cache@v3
+      with:
+        path: ~/.local/share/pnpm/store/v3
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-
 
     - name: Install dependencies
       run: pnpm install

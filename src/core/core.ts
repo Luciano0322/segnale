@@ -105,6 +105,8 @@ export function createPrimitiveSignal<T>(initialValue: T): Segnale<T> {
       for (const sub of subscriptions) {
         if (!sub.dirty) {
           sub.dirty = true;
+        }
+        if (sub.isEffect) {
           scheduleComputation(sub);
         }
       }
@@ -165,6 +167,7 @@ export function createEffect(fn: () => void | Promise<void>) {
     },
     dependencies: new Set(),
     dirty: true,
+    isEffect: true, // For effect lazy execution
   };
 
   scheduleComputation(running);

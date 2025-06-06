@@ -31,6 +31,7 @@ export function useSegnaleEffect(fn: () => void, dependencies: unknown[]) {
       },
       dependencies: new Set(),
       dirty: true,
+      isEffect: true,
     };
 
     scheduleComputation(running);
@@ -56,6 +57,7 @@ export function useSegnaleAsyncEffect(
       },
       dependencies: new Set(),
       dirty: true,
+      isEffect: true,
     };
 
     scheduleComputation(running);

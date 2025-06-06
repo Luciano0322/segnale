@@ -3,6 +3,7 @@ export interface Computation<T = unknown> {
   execute: () => void;
   dirty: boolean;
   value?: T;
+  isEffect?: boolean; // For effect lazy execution
 }
 
 export interface Segnale<T> {
